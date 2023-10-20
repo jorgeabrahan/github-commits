@@ -25,7 +25,7 @@ describe('AppController', () => {
       const result = [];
       mockedAxios.get.mockResolvedValue({ data: result });
 
-      expect(await service.getCommits()).toBe(result);
+      expect(await service.getCommits()).toEqual(result);
     });
   });
 });
