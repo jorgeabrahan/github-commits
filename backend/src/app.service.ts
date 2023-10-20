@@ -34,4 +34,38 @@ export class AppService {
     const { data } = await axios.get(`${this.baseUrl}/commits`);
     return data.filter((commit) => commit.commit.message.includes(keyword));
   }
+
+  async getCommitsByFilters(
+    author?: string,
+    dateSince?: string,
+    dateUntil?: string,
+    keyword?: string,
+  ) {
+    let url = `${this.baseUrl}/commits`;
+    const params = [];
+
+    if (dateSince && dateUntil) {
+      params.push(
+        `since=${dateSince}T00:00:00Z`,
+        `until=${dateUntil}T23:59:59Z`,
+      );
+    }
+
+    if (author) {
+      params.push(`author=${author}`);
+    }
+
+    if (params.length > 0) url += '?' + params.join('&');
+    const { data } = await axios.get(url);
+
+    let commits = data;
+    // if a keyword is present
+    if (keyword) {
+      // filter comments by keyword
+      commits = commits.filter(
+        (commit) => commit?.commit?.message?.includes(keyword),
+      );
+    }
+    return commits;
+  }
 }
