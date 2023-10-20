@@ -22,4 +22,11 @@ export class AppService {
     );
     return data;
   }
+
+  async getCommitsByDate(dateSince: string, dateUntil: string) {
+    const { data } = await axios.get(
+      `${this.baseUrl}/commits?since=${dateSince}T00:00:00Z&until=${dateUntil}T23:59:59Z`,
+    );
+    return data;
+  }
 }
