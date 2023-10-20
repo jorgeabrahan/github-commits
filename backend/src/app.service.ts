@@ -29,4 +29,9 @@ export class AppService {
     );
     return data;
   }
+
+  async getCommitsByKeyword(keyword: string) {
+    const { data } = await axios.get(`${this.baseUrl}/commits`);
+    return data.filter((commit) => commit.commit.message.includes(keyword));
+  }
 }
