@@ -28,4 +28,13 @@ describe('AppController', () => {
       expect(await service.getCommits()).toEqual(result);
     });
   });
+
+  describe('getCommitsByAuthor', () => {
+    it('should return an array of commits by the specified author', async () => {
+      const result = [];
+      mockedAxios.get.mockResolvedValue({ data: result });
+
+      expect(await service.getCommitsByAuthor('jorgeabrahan')).toEqual(result);
+    });
+  });
 });
