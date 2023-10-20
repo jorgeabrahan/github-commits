@@ -28,4 +28,9 @@ export class AppController {
     // date format ISO 8601: `{year}-{month}-{day}`
     return this.appService.getCommitsByDate(dateSince, dateUntil);
   }
+
+  @Get('commits/keyword')
+  getCommitsByKeyword(@Query('keyword') keyword: string) {
+    return this.appService.getCommitsByKeyword(keyword);
+  }
 }
