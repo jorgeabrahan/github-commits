@@ -33,4 +33,19 @@ export class AppController {
   getCommitsByKeyword(@Query('keyword') keyword: string) {
     return this.appService.getCommitsByKeyword(keyword);
   }
+
+  @Get('commits/filters')
+  getCommitsByFilters(
+    @Query('author') author?: string,
+    @Query('dateSince') dateSince?: string,
+    @Query('dateUntil') dateUntil?: string,
+    @Query('keyword') keyword?: string,
+  ) {
+    return this.appService.getCommitsByFilters(
+      author,
+      dateSince,
+      dateUntil,
+      keyword,
+    );
+  }
 }
