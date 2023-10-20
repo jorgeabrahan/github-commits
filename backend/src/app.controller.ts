@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -13,5 +13,10 @@ export class AppController {
   @Get('commits')
   getCommits() {
     return this.appService.getCommits();
+  }
+
+  @Get('commits/author')
+  getCommitsByAuthor(@Query('author') author: string) {
+    return this.appService.getCommitsByAuthor(author);
   }
 }
