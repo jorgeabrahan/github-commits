@@ -37,4 +37,15 @@ describe('AppController', () => {
       expect(await service.getCommitsByAuthor('jorgeabrahan')).toEqual(result);
     });
   });
+
+  describe('getCommitsByDate', () => {
+    it('should return an array of commits between the specified dates', async () => {
+      const result = [];
+      mockedAxios.get.mockResolvedValue({ data: result });
+
+      expect(
+        await service.getCommitsByDate('2023-10-01', '2023-10-31'),
+      ).toEqual(result);
+    });
+  });
 });
