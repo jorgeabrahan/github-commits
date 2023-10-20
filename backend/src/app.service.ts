@@ -15,4 +15,11 @@ export class AppService {
     const { data } = await axios.get(`${this.baseUrl}/commits`);
     return data;
   }
+
+  async getCommitsByAuthor(author: string) {
+    const { data } = await axios.get(
+      `${this.baseUrl}/commits?author=${author}`,
+    );
+    return data;
+  }
 }
