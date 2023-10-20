@@ -48,4 +48,20 @@ describe('AppController', () => {
       ).toEqual(result);
     });
   });
+
+  describe('getCommitsByFilters', () => {
+    it('should return an array of commits that match the specified filters', async () => {
+      const result = [];
+      mockedAxios.get.mockResolvedValue({ data: result });
+
+      expect(
+        await service.getCommitsByFilters(
+          'jorgeabrahan',
+          '2023-10-01',
+          '2023-10-31',
+          'Test',
+        ),
+      ).toEqual(result);
+    });
+  });
 });
