@@ -32,7 +32,12 @@ export class AppService {
 
   async getCommitsByKeyword(keyword: string) {
     const { data } = await axios.get(`${this.baseUrl}/commits`);
-    return data.filter((commit) => commit.commit.message.includes(keyword));
+    return data.filter(
+      (commit) =>
+        commit?.commit?.message
+          ?.toLowerCase()
+          ?.includes(keyword?.toLowerCase()),
+    );
   }
 
   async getCommitsByFilters(
@@ -63,7 +68,10 @@ export class AppService {
     if (keyword) {
       // filter comments by keyword
       commits = commits.filter(
-        (commit) => commit?.commit?.message?.includes(keyword),
+        (commit) =>
+          commit?.commit?.message
+            ?.toLowerCase()
+            ?.includes(keyword?.toLowerCase()),
       );
     }
     return commits;
