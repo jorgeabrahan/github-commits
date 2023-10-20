@@ -19,4 +19,13 @@ export class AppController {
   getCommitsByAuthor(@Query('author') author: string) {
     return this.appService.getCommitsByAuthor(author);
   }
+
+  @Get('commits/date')
+  getCommitsByDate(
+    @Query('dateSince') dateSince: string,
+    @Query('dateUntil') dateUntil: string,
+  ) {
+    // date format ISO 8601: `{year}-{month}-{day}`
+    return this.appService.getCommitsByDate(dateSince, dateUntil);
+  }
 }
