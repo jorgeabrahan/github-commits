@@ -5,3 +5,10 @@
 :root {
   color-scheme: dark light;
 }
+body {
+  background-color: #111927;
+  background-image: url('./src/assets/svg/background-pattern.svg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
