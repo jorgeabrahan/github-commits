@@ -23,7 +23,7 @@ export const CommitAccordion = ({
   return (
     <details className="relative my-5" open={isOpen} ref={accordionRef}>
       <summary className="mb-3 flex justify-between items-center [&>*]:pointer-events-none cursor-pointer" onClick={handleAccordionToggle}>
-        <h2 className="text-slate-400">
+        <h2>
           Commits on {monthNumberToString(commitGroupDate.getMonth())} {commitGroupDate.getDate()},{' '}
           {commitGroupDate.getFullYear()}
         </h2>
