@@ -1,37 +1,44 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { showToastError } from '../helpers'
+import { showToastError, showToastSuccess } from '../helpers'
 import type { CommitI, CommitGroupI } from '../interfaces'
-import { Commit, CommitAccordion } from './commits-c'
+import { CommitAccordion } from './commits-c'
+import { API_BASE_URL } from '../config/apiConfig'
+import { CommitsList } from './commits-c/CommitsList'
+import { LoadingIcon, NothingFound } from './global'
 
 export const Commits = () => {
   const [commitGroups, setCommitGroups] = useState<CommitGroupI[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     const fetchCommits = () => {
       axios
-        .get('http://localhost:3000/commits')
+        .get(`${API_BASE_URL}/commits`)
         .then((res) => {
           setCommitGroups(groupCommitsByDate(res?.data || []))
+          if (res?.data?.length === 0) {
+            showToastSuccess('Query returned no results')
+            return
+          }
+          showToastSuccess(`Query returned ${res?.data?.length} results`)
         })
         .catch((_) => showToastError("Couldn't get commits"))
+        .finally(() => setIsLoading(false))
     }
+    setIsLoading(true)
     fetchCommits()
   }, [])
+  if (isLoading) return <LoadingIcon />
+  else if (commitGroups?.length === 0) return <NothingFound />
   return (
-    <>
-      {commitGroups?.map((commitGroup) => {
-        const commitGroupDate = new Date(commitGroup?.date)
-        return (
-          <CommitAccordion key={commitGroupDate.getTime()} commitGroupDate={commitGroupDate}>
-            <ul className="border border-solid border-slate-700 rounded-xl [&>li:first-child]:rounded-t-xl [&>li:last-child]:border-none [&>li:last-child]:rounded-b-xl">
-              {commitGroup?.group?.map((commit: CommitI) => (
-                <Commit key={commit?.sha} commit={commit} />
-              ))}
-            </ul>
-          </CommitAccordion>
-        )
-      })}
-    </>
+    commitGroups?.map((commitGroup) => {
+      const commitGroupDate = new Date(commitGroup?.date)
+      return (
+        <CommitAccordion key={commitGroupDate.getTime()} commitGroupDate={commitGroupDate}>
+          <CommitsList commits={commitGroup?.group} />
+        </CommitAccordion>
+      )
+    })
   )
 }
 
