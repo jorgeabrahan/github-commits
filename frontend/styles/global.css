@@ -7,6 +7,7 @@
 }
 body {
   background-color: #111927;
+  min-height: 100vh;
   background-image: url('./src/assets/svg/background-pattern.svg');
   background-size: cover;
   background-position: center center;
