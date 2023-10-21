@@ -3,6 +3,7 @@ interface Props {
 	title: string;
 }
 const { title } = Astro.props;
+import { Toaster } from 'react-hot-toast';
 import '../../styles/global.css'
 ---
 
@@ -17,6 +18,11 @@ import '../../styles/global.css'
 		<title>{title}</title>
 	</head>
 	<body>
+		<Toaster
+			position="top-center"
+			reverseOrder={false}
+			client:load
+		/>
 		<slot />
 	</body>
 </html>
