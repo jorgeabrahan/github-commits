@@ -1,10 +1,13 @@
 ---
 import { Commits } from '../components/Commits';
+import Delimiter from '../layouts/Delimiter.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="GitHub Commits History">
 	<main>
-		<Commits client:load />
+		<Delimiter>
+			<Commits client:load />
+		</Delimiter>
 	</main>
 </Layout>
