@@ -5,7 +5,7 @@ export default {
 		extend: {
 			colors: {
 				'rich-black': {
-					DEFAULT: '#111928'
+					DEFAULT: '#06090E'
 				}
 			}
 		},
