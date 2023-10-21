@@ -1,9 +1,10 @@
 ---
+import { Commits } from '../components/Commits';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="GitHub Commits History">
 	<main>
-		<p>Hello world!</p>
+		<Commits client:load />
 	</main>
 </Layout>
