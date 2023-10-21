@@ -1,11 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { config } from 'dotenv';
+
+config();
 
 @Injectable()
 export class AppService {
   private readonly owner = 'jorgeabrahan';
   private readonly repo = 'github-commits';
   private readonly baseUrl = `https://api.github.com/repos/${this.owner}/${this.repo}`;
+  private readonly token = process.env.GITHUB_TOKEN;
+
+  // Crea una instancia de axios con los encabezados de autorización configurados
+  private readonly axiosInstance = axios.create({
+    headers: {
+      Authorization: `Bearer ${this.token}`,
+    },
+  });
 
   getWelcome(): string {
     return 'Welcome to the GitHub commits NestJS application';
@@ -13,7 +24,7 @@ export class AppService {
 
   async getCommits() {
     try {
-      const { data } = await axios.get(`${this.baseUrl}/commits`);
+      const { data } = await this.axiosInstance.get(`${this.baseUrl}/commits`);
       return data;
     } catch (_) {
       throw new Error('Error while fetching commits from GitHub');
@@ -22,7 +33,7 @@ export class AppService {
 
   async getCommitsByAuthor(author: string) {
     try {
-      const { data } = await axios.get(
+      const { data } = await this.axiosInstance.get(
         `${this.baseUrl}/commits?author=${author}`,
       );
       return data;
@@ -33,7 +44,7 @@ export class AppService {
 
   async getCommitsByDate(dateSince: string, dateUntil: string) {
     try {
-      const { data } = await axios.get(
+      const { data } = await this.axiosInstance.get(
         `${this.baseUrl}/commits?since=${dateSince}T00:00:00Z&until=${dateUntil}T23:59:59Z`,
       );
       return data;
@@ -44,7 +55,7 @@ export class AppService {
 
   async getCommitsByKeyword(keyword: string) {
     try {
-      const { data } = await axios.get(`${this.baseUrl}/commits`);
+      const { data } = await this.axiosInstance.get(`${this.baseUrl}/commits`);
       return data.filter(
         (commit) =>
           commit?.commit?.message
@@ -78,7 +89,7 @@ export class AppService {
 
     if (params.length > 0) url += '?' + params.join('&');
     try {
-      const { data } = await axios.get(url);
+      const { data } = await this.axiosInstance.get(url);
 
       let commits = data;
       // if a keyword is present
