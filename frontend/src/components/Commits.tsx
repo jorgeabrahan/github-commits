@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { monthNumberToString, showToastError } from '../helpers'
+import { showToastError } from '../helpers'
 import type { CommitI, CommitGroupI } from '../interfaces'
-import { Commit } from './commits-c/Commit'
+import { Commit, CommitAccordion } from './commits-c'
 
 export const Commits = () => {
   const [commitGroups, setCommitGroups] = useState<CommitGroupI[]>([])
@@ -22,17 +22,13 @@ export const Commits = () => {
       {commitGroups?.map((commitGroup) => {
         const commitGroupDate = new Date(commitGroup?.date)
         return (
-          <section className="relative my-6" key={commitGroupDate.getTime()}>
-            <h2 className="text-slate-400 mb-3">
-              Commits on {monthNumberToString(commitGroupDate.getMonth())}{' '}
-              {commitGroupDate.getDate()}, {commitGroupDate.getFullYear()}
-            </h2>
+          <CommitAccordion key={commitGroupDate.getTime()} commitGroupDate={commitGroupDate}>
             <ul className="border border-solid border-slate-700 rounded-xl [&>li:first-child]:rounded-t-xl [&>li:last-child]:border-none [&>li:last-child]:rounded-b-xl">
               {commitGroup?.group?.map((commit: CommitI) => (
                 <Commit key={commit?.sha} commit={commit} />
               ))}
             </ul>
-          </section>
+          </CommitAccordion>
         )
       })}
     </>
