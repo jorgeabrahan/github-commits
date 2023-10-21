@@ -1,0 +1,75 @@
+---
+import { Astro } from 'astro'
+import Delimiter from '../../layouts/Delimiter.astro'
+const pathname = new URL(Astro.request.url).pathname
+const currentPath = pathname.slice(1)
+---
+
+<header
+  class="bg-rich-black/75 backdrop-blur-sm backdrop-saturate-150 border-b border-solid border-slate-700"
+>
+  <Delimiter className="flex justify-between items-center py-4">
+    <a href="https://github.com" target="_blank">
+      <img src="/github-dark.png" alt="github icon" />
+    </a>
+    <nav>
+      <ul class="flex items-center gap-4">
+        <li>
+          <a
+            class={`hover:scale-105 block transition-transform ${
+              currentPath === '' ? 'underline' : ''
+            }`}
+            href="/"
+            title="List of commits grouped by date"
+          >
+            Commits
+          </a>
+        </li>
+        <li>
+          <a
+            class={`hover:scale-105 block transition-transform ${
+              currentPath === 'author' ? 'underline' : ''
+            }`}
+            href="/author"
+            title="Filter commits by author"
+          >
+            Author
+          </a>
+        </li>
+        <li>
+          <a
+            class={`hover:scale-105 block transition-transform ${
+              currentPath === 'date' ? 'underline' : ''
+            }`}
+            href="/date"
+            title="Filter commits by date"
+          >
+            Date
+          </a>
+        </li>
+        <li>
+          <a
+            class={`hover:scale-105 block transition-transform ${
+              currentPath === 'keyword' ? 'underline' : ''
+            }`}
+            href="/keyword"
+            title="Filter commits by keyword"
+          >
+            Keyword
+          </a>
+        </li>
+        <li>
+          <a
+            class={`hover:scale-105 block transition-transform ${
+              currentPath === 'filter' ? 'underline' : ''
+            }`}
+            href="/filter"
+            title="Filter commits by any parameter"
+          >
+            Filter
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </Delimiter>
+</header>
