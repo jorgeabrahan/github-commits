@@ -1,6 +1,6 @@
 import type { CommitI } from "./commit.interface";
 
 export interface CommitGroupI {
-  date: Date;
+  date: string;
   group: CommitI[];
 }
