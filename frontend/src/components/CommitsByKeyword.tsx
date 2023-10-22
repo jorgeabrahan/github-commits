@@ -3,13 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config/apiConfig";
 import { showToastError, showToastSuccess } from "../helpers";
-import { CommitsAndFilters, InputFilter } from "./global";
+import { CommitsAndFilters, LabeledInputFilter } from "./global";
 
 export const CommitsByKeyword = () => {
   const [commits, setCommits] = useState([])
   const [keyword, setKeyword] = useState('create')
   const [isLoading, setIsLoading] = useState(true)
-  const debouncedKeyword = useDebounce(keyword, 300);
+  const debouncedKeyword = useDebounce(keyword, 300)
   useEffect(() => {
     const fetchCommitsByKeyword = () => {
       axios
@@ -35,7 +35,9 @@ export const CommitsByKeyword = () => {
   }
   return (
     <CommitsAndFilters isLoading={isLoading} commits={commits}>
-      <InputFilter handleInputChange={handleInputChange} value={keyword} />
+      <form className="flex gap-4 my-3 justify-end">
+        <LabeledInputFilter handleInputChange={handleInputChange} value={keyword} label="Keyword" id='keyword' />
+      </form>
     </CommitsAndFilters>
   )
 }
