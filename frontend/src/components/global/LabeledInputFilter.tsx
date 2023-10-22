@@ -12,7 +12,7 @@ export const LabeledInputFilter = ({
   label: string
 }) => {
   return (
-    <div className='grid bg-rich-black/75 backdrop-blur-sm backdrop-saturate-150 px-4 py-2 rounded-lg gap-2 border border-solid border-slate-700'>
+    <div className='grid bg-rich-black/75 backdrop-blur-sm backdrop-saturate-150 px-4 py-4 rounded-lg gap-2 border border-solid border-slate-700'>
       <label className='font-semibold' htmlFor={id}>{label}</label>
       <input
         className="bg-transparent cursor-pointer focus:outline-none px-2 py-1 border border-solid border-slate-700 rounded-md"
