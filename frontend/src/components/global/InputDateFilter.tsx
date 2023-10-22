@@ -14,7 +14,7 @@ export const InputDateFilter = ({
   min?: string
 }) => {
   return (
-    <div className="grid bg-rich-black/75 backdrop-blur-sm backdrop-saturate-150 px-4 py-2 rounded-lg gap-2 border border-solid border-slate-700">
+    <div className="grid bg-rich-black/75 backdrop-blur-sm backdrop-saturate-150 px-4 py-4 rounded-lg gap-2 border border-solid border-slate-700">
       <label className="font-semibold" htmlFor={id}>
         {label}
       </label>
