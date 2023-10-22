@@ -42,7 +42,7 @@ export const CommitsByDate = () => {
   }
   return (
     <CommitsAndFilters isLoading={isLoading} commits={commits}>
-      <form className='flex gap-4 my-3 justify-end'>
+      <form className='flex flex-col lg:flex-row gap-3 lg:gap-4 my-3 justify-end'>
         <InputDateFilter handleInputChange={handleInputChange} value={datesForm.dateSince} id='dateSince' label='Since' />
         <InputDateFilter handleInputChange={handleInputChange} value={datesForm.dateUntil} id='dateUntil' label='Until' />
       </form>
