@@ -3,13 +3,13 @@ import { showToastError, showToastSuccess } from "../helpers"
 import { useDebounce } from "@uidotdev/usehooks";
 import axios from "axios"
 import { API_BASE_URL } from "../config/apiConfig"
-import { CommitsAndFilters, InputFilter } from "./global";
+import { CommitsAndFilters, LabeledInputFilter } from "./global";
 
 export const CommitsByAuthor = () => {
   const [commits, setCommits] = useState([])
   const [author, setAuthor] = useState('jorgeabrahan')
   const [isFiltering, setIsFiltering] = useState(true)
-  const debouncedAuthor = useDebounce(author, 300);
+  const debouncedAuthor = useDebounce(author, 300)
   useEffect(() => {
     const fetchCommitsByAuthor = () => {
       axios
@@ -35,7 +35,9 @@ export const CommitsByAuthor = () => {
   }
   return (
     <CommitsAndFilters isLoading={isFiltering} commits={commits}>
-      <InputFilter handleInputChange={handleInputChange} value={author} />
+      <form className="flex gap-4 my-3 justify-end">
+        <LabeledInputFilter handleInputChange={handleInputChange} value={author} label="Author" id='author' />
+      </form>
     </CommitsAndFilters>
   )
 }
