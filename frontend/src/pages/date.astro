@@ -1,4 +1,5 @@
 ---
+import { CommitsByDate } from "../components/CommitsByDate";
 import Delimiter from "../layouts/Delimiter.astro";
 import Layout from "../layouts/Layout.astro";
 
@@ -7,7 +8,7 @@ import Layout from "../layouts/Layout.astro";
 <Layout title="GitHub Commits - by date">
 	<main>
 		<Delimiter>
-			<h1>hello world</h1>
+			<CommitsByDate client:load />
 		</Delimiter>
 	</main>
 </Layout>
