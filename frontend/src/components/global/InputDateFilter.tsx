@@ -19,7 +19,7 @@ export const InputDateFilter = ({
         {label}
       </label>
       <input
-        className="bg-transparent cursor-pointer"
+        className="bg-transparent cursor-pointer px-2 py-1 border border-solid border-slate-700 rounded-md focus:outline-none"
         type="date"
         name={id}
         id={id}
